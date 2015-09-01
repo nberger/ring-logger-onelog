@@ -58,6 +58,9 @@ OneLog's convenience methods to change the log level:
 (onelog.core/set-warn!)
 ```
 
+## Contributing
+
+Pull requests, issues and any feedback are all welcome!
 
 ## License
 
