@@ -1,6 +1,8 @@
-# ring-logger-onelog
+# ring-logger-onelog [![Circle CI](https://circleci.com/gh/nberger/ring-logger-onelog.svg?style=svg)](https://circleci.com/gh/nberger/ring-logger-onelog)
 
 OneLog implementation for [ring-logger](https://github.com/nberger/ring-logger)
+
+[![Clojars Project](http://clojars.org/ring-logger-onelog/latest-version.svg)](http://clojars.org/ring-logger-onelog)
 
 Migration from ring.middleware.logger
 -------------------------------------
