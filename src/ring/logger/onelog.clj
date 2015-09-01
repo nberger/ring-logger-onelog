@@ -35,20 +35,20 @@
 
   (add-extra-middleware [_ handler]
     (fn [request]
-      (println "adding logging context")
       (log-config/with-logging-context (format-id (rand-int 0xffff))
         (handler request))))
 
-  (error [_ x] (log/error x))
-  (error-with-ex [_ ex x] (log/error (log/throwable ex) x))
-  (info [_ x] (log/info x)) 
-  (warn [_ x] (log/warn x)) 
-  (debug [_ x] (log/debug x))
-  (trace [_ x] (log/trace x)))
+  (log [_ level throwable message]
+    (let [throwable (when throwable (log/throwable throwable))]
+    (case level
+      :error (log/error throwable message)
+      :info (log/info throwable message)
+      :warn (log/warn throwable message)
+      :debug (log/debug throwable message)
+      :trace (log/trace throwable message)))))
 
 (defn make-onelog-logger []
   (OnelogLogger.))
-
 
 (defn wrap-with-logger
   "Returns a Ring middleware handler which uses OneLog as logger.
@@ -58,5 +58,5 @@
   ([handler options]
    (logger/wrap-with-logger
      handler
-     (merge options {:logger-impl (make-onelog-logger)})))
+     (merge options {:logger (make-onelog-logger)})))
   ([handler] (wrap-with-logger handler {})))
