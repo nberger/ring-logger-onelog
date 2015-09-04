@@ -1,10 +1,10 @@
 # ring-logger-onelog [![Circle CI](https://circleci.com/gh/nberger/ring-logger-onelog.svg?style=svg)](https://circleci.com/gh/nberger/ring-logger-onelog)
 
-OneLog implementation for [ring-logger](https://github.com/nberger/ring-logger)
+[OneLog](https://github.com/pjlegato/onelog) implementation for [ring-logger](https://github.com/nberger/ring-logger)
 
 [![Clojars Project](http://clojars.org/ring-logger-onelog/latest-version.svg)](http://clojars.org/ring-logger-onelog)
 
-Migration from ring.middleware.logger
+Migration from [ring.middleware.logger](https://github.com/pjlegato/ring.middleware.logger)
 -------------------------------------
 
 The migration is pretty straightforward:
@@ -37,19 +37,18 @@ using the default ring-logger, but requiring the onelog namespace:
     (jetty/run-jetty (logger.onelog/wrap-with-logger my-ring-app {:port 8080}))
 ```
 
-Differences with plain ring-logger
+Differences from plain [ring-logger](https://github.com/nberger/ring-logger)
 ---------------------------------
 
 Each request is assigned a random 4-hex-digit ID, so that different log messages pertaining to the same request can be cross-referenced.
 These IDs are printed in random ANSI colors by default, for easy visual correlation of log messages while reading a log file.
 
-Log Levels with OneLog
+Log Levels
 ----------
 
 The logger logs at `INFO` level by default. More verbose information is logged when the logger is at `DEBUG` level.
 
-ring-logger-onelog uses [OneLog](https://github.com/pjlegato/onelog) internally, so we can use
-OneLog's convenience methods to change the log level:
+We can use OneLog's convenience methods to change the log level:
 
 
 ```clojure
