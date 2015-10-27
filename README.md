@@ -34,7 +34,7 @@ using the default ring-logger, but requiring the onelog namespace:
           :headers {"Content-Type" "text/html"}
           :body "Hello world!"})
 
-    (jetty/run-jetty (logger.onelog/wrap-with-logger my-ring-app {:port 8080}))
+    (jetty/run-jetty (logger.onelog/wrap-with-logger my-ring-app) {:port 8080})
 ```
 
 Differences from plain [ring-logger](https://github.com/nberger/ring-logger)
