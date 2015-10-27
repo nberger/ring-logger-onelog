@@ -18,7 +18,7 @@ The migration is pretty straightforward:
 In your `project.clj`, add the following dependencies:
 
 ```clojure
-    [ring-logger-onelog "0.7.0"]
+    [ring-logger-onelog "0.7.5"]
 ```
 
 Add the middleware to your stack, using the onelog implementation. It's similar to
