@@ -65,8 +65,8 @@
 (defn wrap-with-logger
   "Returns a Ring middleware handler which uses OneLog as logger.
 
-  Supported options are the same as of ring.logger/wrap-with-logger, except of
-  :logger-impl which is fixed to a OnelogLogger instance"
+  Supported options are the same as of ring.logger/wrap-with-logger, except for
+  :logger which is fixed to a OnelogLogger instance"
   ([handler options]
    (println "onelog wrap-with-logger")
    (logger/wrap-with-logger
