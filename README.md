@@ -18,23 +18,23 @@ The migration is pretty straightforward:
 In your `project.clj`, add the following dependencies:
 
 ```clojure
-    [ring-logger-onelog "0.7.5"]
+[ring-logger-onelog "0.7.5"]
 ```
 
 Add the middleware to your stack, using the onelog implementation. It's similar to
 using the default ring-logger, but requiring the onelog namespace:
 
 ```clojure
-    (ns foo
-      (:require [ring.adapter.jetty :as jetty]
-                [ring.logger.onelog :as logger.onelog]))
+(ns foo
+  (:require [ring.adapter.jetty :as jetty]
+            [ring.logger.onelog :as logger.onelog]))
 
-    (defn my-ring-app [request]
-         {:status 200
-          :headers {"Content-Type" "text/html"}
-          :body "Hello world!"})
+(defn my-ring-app [request]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body "Hello world!"})
 
-    (jetty/run-jetty (logger.onelog/wrap-with-logger my-ring-app) {:port 8080})
+(jetty/run-jetty (logger.onelog/wrap-with-logger my-ring-app) {:port 8080})
 ```
 
 Differences from plain [ring-logger](https://github.com/nberger/ring-logger)
