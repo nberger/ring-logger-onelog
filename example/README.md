@@ -8,7 +8,8 @@ output that it produces
 1. `lein trampoline run`
 
 2. Check output in console *and* in `log/clojure.log` (the default output file
-   configured by onelog)
+   configured by onelog). The output is generated twice, the first one with the
+   default colorizing printer, the second one with `:printer :no-color`.
 
 
 ## License
