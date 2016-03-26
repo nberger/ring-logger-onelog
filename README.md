@@ -9,7 +9,7 @@ Migration from [ring.middleware.logger](https://github.com/pjlegato/ring.middlew
 
 The migration is pretty straightforward:
 
-* Replace dependency in `project.clj` from `[ring.middleware.logger "0.5.0"]` to `[ring-logger-onelog "0.7.5"]`
+* Replace dependency in `project.clj` from `[ring.middleware.logger "0.5.0"]` to `[ring-logger-onelog "0.7.6"]`
 * Replace the require from `[ring.middleware.logger :as logger]` to `[ring.logger.onelog :as logger]`
 * Pass options to `wrap-with-logger` using a proper map instead of keyword arguments.
 
@@ -18,7 +18,7 @@ The migration is pretty straightforward:
 In your `project.clj`, add the following dependencies:
 
 ```clojure
-[ring-logger-onelog "0.7.5"]
+[ring-logger-onelog "0.7.6"]
 ```
 
 Add the middleware to your stack, using the onelog implementation. It's similar to

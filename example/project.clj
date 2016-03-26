@@ -7,5 +7,5 @@
                  [compojure "1.4.0"]
                  [ring/ring-jetty-adapter "1.4.0"]
                  [clj-http "2.0.0"]
-                 [ring-logger-onelog "0.7.5"]]
+                 [ring-logger-onelog "0.7.6"]]
   :main example.core)
