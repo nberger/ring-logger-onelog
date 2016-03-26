@@ -40,8 +40,18 @@ using the default ring-logger, but requiring the onelog namespace:
 Differences from plain [ring-logger](https://github.com/nberger/ring-logger)
 ---------------------------------
 
-Each request is assigned a random 4-hex-digit ID, so that different log messages pertaining to the same request can be cross-referenced.
-These IDs are printed in random ANSI colors by default, for easy visual correlation of log messages while reading a log file.
+Each request is assigned a random 4-hex-digit ID, so that different log messages
+pertaining to the same request can be cross-referenced.
+
+These IDs are printed in random ANSI colors by default, for easy visual
+correlation of log messages while reading a log file.
+
+* Q: I don't want ANSI colors, how can I remove them?
+* A: Use the `:printer :no-color` option when creating the logger:
+
+```clojure
+(logger.onelog/wrap-with-logger my-ring-app {:printer :no-color})
+```
 
 Log Levels
 ----------
