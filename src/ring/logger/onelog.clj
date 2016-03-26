@@ -25,17 +25,27 @@
         background (nth background-possibilities (mod id (- id-colorization-count 1)))]
     [foreground background]))
 
-(defn- format-id [id]
-  "Returns a standard colorized, printable representation of a request id."
-  (if id
-    (apply ansi/style (format "%04x" id) [:bright] (get-colorization id))))
+(defmulti format-id
+  "Returns a printable representation of a request id.
 
-(defrecord OnelogLogger []
+  Actual output depends on :printer option. By default it's ANSI-colorized.
+  To get a non-colorized format use :printer :no-color"
+  (fn [{:keys [printer]} & _] printer))
+
+(defmethod format-id :default
+  [_ id]
+  (apply ansi/style (format "%04x" id) [:bright] (get-colorization id)))
+
+(defmethod format-id :no-color
+  [_ id]
+  (format "%04x" id))
+
+(defrecord OnelogLogger [printer]
   Logger
 
-  (add-extra-middleware [_ handler]
+  (add-extra-middleware [this handler]
     (fn [request]
-      (log-config/with-logging-context (format-id (rand-int 0xffff))
+      (log-config/with-logging-context (format-id this (rand-int 0xffff))
         (handler request))))
 
   (log [_ level throwable message]
@@ -47,8 +57,10 @@
       :debug (log/debug throwable message)
       :trace (log/trace throwable message)))))
 
-(defn make-onelog-logger []
-  (OnelogLogger.))
+(defn make-onelog-logger
+  ([] (make-onelog-logger {}))
+  ([options]
+   (map->OnelogLogger options)))
 
 (defn wrap-with-logger
   "Returns a Ring middleware handler which uses OneLog as logger.
@@ -56,7 +68,8 @@
   Supported options are the same as of ring.logger/wrap-with-logger, except of
   :logger-impl which is fixed to a OnelogLogger instance"
   ([handler options]
+   (println "onelog wrap-with-logger")
    (logger/wrap-with-logger
      handler
-     (merge options {:logger (make-onelog-logger)})))
+     (merge options {:logger (make-onelog-logger options)})))
   ([handler] (wrap-with-logger handler {})))
