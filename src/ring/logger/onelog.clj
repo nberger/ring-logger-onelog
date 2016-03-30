@@ -68,7 +68,6 @@
   Supported options are the same as of ring.logger/wrap-with-logger, except for
   :logger which is fixed to a OnelogLogger instance"
   ([handler options]
-   (println "onelog wrap-with-logger")
    (logger/wrap-with-logger
      handler
      (merge options {:logger (make-onelog-logger options)})))
