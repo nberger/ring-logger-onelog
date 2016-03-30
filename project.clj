@@ -1,4 +1,4 @@
-(defproject ring-logger-onelog "0.7.7-SNAPSHOT"
+(defproject ring-logger-onelog "0.7.7"
   :description "OneLog implementation for ring-logger"
   :url "http://github.com/nberger/ring-logger-onelog"
   :license {:name "Eclipse Public License"
